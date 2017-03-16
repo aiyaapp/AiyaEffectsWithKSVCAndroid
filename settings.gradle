@@ -1,0 +1,8 @@
+include ':demo'
+
+//include ':AiyaEffectsAndroid'
+//
+//project(':AiyaEffectsAndroid').setProjectDir(new File('../AiyaEffectsDemoDroid'))
+//
+//
+//include ':AiyaEffectsAndroid:AiyaCameraSDK'
