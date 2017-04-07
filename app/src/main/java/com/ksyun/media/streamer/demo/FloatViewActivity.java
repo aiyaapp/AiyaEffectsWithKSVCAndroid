@@ -39,7 +39,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.streamer.capture.camera.CameraTouchHelper;
 import com.ksyun.media.streamer.filter.audio.AudioFilterBase;

@@ -14,10 +14,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.view.KSYFloatingWindowView;
-
 
 /**
  * Created by xbc on 2017/3/14.

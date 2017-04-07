@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.player.KSYMediaPlayer;
 

@@ -11,16 +11,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.model.NetDbAdapter;
 import com.ksyun.live.demo.player.util.Settings;
-
 import java.util.ArrayList;
 
 /**
  * Created by liubohua on 16/7/20.
  */
-public class HistoryActivity extends Activity {
+public class HistoryActivity extends Activity{
     private ListView hislist;
     private ArrayList<String> listurl;
     private Cursor cursor;
@@ -31,10 +30,7 @@ public class HistoryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
         settings = getSharedPreferences("SETTINGS", Context.MODE_PRIVATE);
-//        SkinChangeUtil.changeSkin(this,settings.getString("choose_skin", "信息为空"));
-
         setContentView(R.layout.activity_history);
         listurl = new ArrayList<String>();
 
@@ -43,14 +39,14 @@ public class HistoryActivity extends Activity {
         NetDb.open();
         cursor = NetDb.getAllData();
         cursor.moveToFirst();
-        if (cursor.getCount() > 0) {
-            listurl.add(cursor.getString(cursor.getColumnIndex(NetDbAdapter.KEY_PATH)));
+        if(cursor.getCount()>0){
+            listurl.add( cursor.getString(cursor.getColumnIndex(NetDbAdapter.KEY_PATH)));
         }
-        while (cursor.moveToNext()) {
-            listurl.add(cursor.getString(cursor.getColumnIndex(NetDbAdapter.KEY_PATH)));
+        while(cursor.moveToNext()){
+            listurl.add( cursor.getString(cursor.getColumnIndex(NetDbAdapter.KEY_PATH)));
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, listurl);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,listurl);
         hislist.setAdapter(adapter);
         hislist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,12 +61,8 @@ public class HistoryActivity extends Activity {
                     Intent intent = new Intent(HistoryActivity.this, TextureVideoActivity.class);
                     intent.putExtra("path", path);
                     startActivity(intent);
-                } else if (playerType.equals(Settings.FLOATING)) {
+                } else {
                     Intent intent = new Intent(HistoryActivity.this, FloatingVideoActivity.class);
-                    intent.putExtra("path", path);
-                    startActivity(intent);
-                }else {
-                    Intent intent = new Intent(HistoryActivity.this, PlayRecordActivity.class);
                     intent.putExtra("path", path);
                     startActivity(intent);
                 }

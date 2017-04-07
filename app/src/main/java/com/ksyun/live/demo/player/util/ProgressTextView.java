@@ -8,8 +8,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
-
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 
 /**
  * Created by liubohua on 16/12/19.

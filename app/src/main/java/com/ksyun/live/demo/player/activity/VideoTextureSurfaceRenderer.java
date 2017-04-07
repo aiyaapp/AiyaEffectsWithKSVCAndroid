@@ -8,8 +8,7 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.util.Log;
 
-
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.util.RawResourceReader;
 import com.ksyun.live.demo.player.util.ShaderHelper;
 

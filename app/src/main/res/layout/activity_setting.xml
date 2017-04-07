@@ -106,12 +106,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/type_floating"/>
-
-                <RadioButton
-                    android:id="@+id/type_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/type_record"/>
             </RadioGroup>
 
         </LinearLayout>

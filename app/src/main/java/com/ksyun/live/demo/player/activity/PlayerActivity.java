@@ -18,8 +18,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.exceptions.HyphenateException;
 
 public class PlayerActivity extends AppCompatActivity implements View.OnClickListener {
     private LocalFragment localFragment;

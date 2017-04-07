@@ -10,7 +10,14 @@
         android:text="@string/network"
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true" />
-
+    <Button
+        android:id="@+id/media_aiyatest"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:text="@string/aiya"
+        android:layout_toRightOf="@id/media_network"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true" />
 
     <Button
         android:id="@+id/media_setting"

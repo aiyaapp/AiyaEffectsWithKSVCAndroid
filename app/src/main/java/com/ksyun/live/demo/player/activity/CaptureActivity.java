@@ -18,14 +18,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.aiyaapp.aiya.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.ksyun.live.demo.R;
 import com.ksyun.live.demo.player.zxing.camera.CameraManager;
+
 import com.ksyun.live.demo.player.zxing.decoding.CaptureActivityHandler;
 import com.ksyun.live.demo.player.zxing.decoding.InactivityTimer;
 import com.ksyun.live.demo.player.zxing.view.ViewfinderView;
-
 import java.io.IOException;
 import java.util.Vector;
 

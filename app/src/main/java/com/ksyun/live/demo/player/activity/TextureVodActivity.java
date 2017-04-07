@@ -15,17 +15,15 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.model.NetState;
 import com.ksyun.live.demo.player.model.Strings;
-import com.ksyun.live.demo.player.record.KSYPlayerRecord;
 import com.ksyun.live.demo.player.util.NetStateUtil;
 import com.ksyun.live.demo.player.util.ProgressTextView;
 import com.ksyun.live.demo.player.util.QosObject;
@@ -37,13 +35,11 @@ import com.ksyun.media.player.KSYMediaMeta;
 import com.ksyun.media.player.KSYMediaPlayer;
 import com.ksyun.media.player.KSYTextureView;
 import com.ksyun.media.player.misc.KSYQosInfo;
-import com.ksyun.media.streamer.kit.StreamerConstants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -136,15 +132,6 @@ public class TextureVodActivity extends Activity implements View.OnClickListener
 
             // Set Video Scaling Mode
             mVideoView.setVideoScalingMode(KSYMediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
-
-            ByteBuffer rawBuffer[] = new ByteBuffer[5];     //5 buffers is just an example
-            for (int index = 0; index < rawBuffer.length; index++) {
-                int yStride = (mVideoWidth + 15) / 16 * 16;
-                int cStride = ((yStride / 2) + 15) / 16 * 16;
-                rawBuffer[index] = ByteBuffer.allocate(yStride * mVideoHeight + cStride * mVideoHeight);
-                mVideoView.addVideoRawBuffer(rawBuffer[index].array());
-            }
-
 
             //start player
             mVideoView.start();

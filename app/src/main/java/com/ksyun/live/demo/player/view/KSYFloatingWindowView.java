@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.activity.FloatingPlayingActivity;
 import com.ksyun.live.demo.player.model.KSYFloatingPlayer;
 import com.ksyun.media.player.KSYMediaPlayer;

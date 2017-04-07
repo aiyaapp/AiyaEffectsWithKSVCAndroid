@@ -1,6 +1,5 @@
 package com.ksyun.media.streamer.demo;
 
-import com.ksyun.live.demo.R;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,17 +35,18 @@ import android.widget.CheckBox;
 import android.widget.Chronometer;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.aiyaapp.aiya.R;
+import com.aiyaapp.camera.sdk.AiyaEffects;
+import com.aiyaapp.camera.sdk.filter.EffectFilter;
+import com.aiyaapp.camera.sdk.widget.AiyaController;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.streamer.capture.camera.CameraTouchHelper;
+import com.ksyun.media.streamer.demo.aiya.AiyaMenu;
+import com.ksyun.media.streamer.demo.aiya.AiyaWrapFilter;
 import com.ksyun.media.streamer.filter.audio.AudioFilterBase;
 import com.ksyun.media.streamer.filter.audio.AudioReverbFilter;
-import com.ksyun.media.streamer.filter.imgtex.ImgBeautyProFilter;
-import com.ksyun.media.streamer.filter.imgtex.ImgBeautyToneCurveFilter;
-import com.ksyun.media.streamer.filter.imgtex.ImgFilterBase;
 import com.ksyun.media.streamer.filter.imgtex.ImgTexFilterBase;
 import com.ksyun.media.streamer.filter.imgtex.ImgTexFilterMgt;
 import com.ksyun.media.streamer.kit.KSYStreamer;
@@ -55,12 +55,12 @@ import com.ksyun.media.streamer.kit.OnPreviewFrameListener;
 import com.ksyun.media.streamer.kit.StreamerConstants;
 import com.ksyun.media.streamer.logstats.StatsLogReport;
 import com.ksyun.media.streamer.util.gles.GLRender;
-
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -116,6 +116,8 @@ public class CameraActivity extends Activity implements
     private Handler mMainHandler;
     private Timer mTimer;
 
+    private AiyaMenu mAiyaMenu;
+
     private boolean mAutoStart;
     private boolean mIsLandscape;
     private boolean mPrintDebugInfo = false;
@@ -127,6 +129,8 @@ public class CameraActivity extends Activity implements
     private String mBgmPath = "/sdcard/test.mp3";
     private String mLogoPath = "file:///sdcard/test.png";
     private String mRecordUrl = "/sdcard/rec_test.mp4";
+
+    private String mEffect;
 
     private boolean mHWEncoderUnsupported;
     private boolean mSWEncoderUnsupported;
@@ -187,7 +191,9 @@ public class CameraActivity extends Activity implements
 
         mCameraHintView = (CameraHintView) findViewById(R.id.camera_hint);
         mCameraPreviewView = (GLSurfaceView) findViewById(R.id.camera_preview);
+
         //mCameraPreviewView = (TextureView) findViewById(R.id.camera_preview);
+
         mUrlTextView = (TextView) findViewById(R.id.url);
         mChronometer = (Chronometer) findViewById(R.id.chronometer);
         mDebugInfoTextView = (TextView) findViewById(R.id.debuginfo);
@@ -317,6 +323,7 @@ public class CameraActivity extends Activity implements
             mPrintDebugInfo = bundle.getBoolean(SHOW_DEBUGINFO, false);
         }
         mStreamer.setDisplayPreview(mCameraPreviewView);
+
         //if (mIsLandscape) {
         //    mStreamer.setOffscreenPreview(1280, 720);
         //} else {
@@ -327,9 +334,6 @@ public class CameraActivity extends Activity implements
         mStreamer.setFrontCameraMirror(mFrontMirrorCheckBox.isChecked());
         mStreamer.setMuteAudio(mMuteCheckBox.isChecked());
         mStreamer.setEnableAudioPreview(mAudioPreviewCheckBox.isChecked());
-        if(mStreamer.isAudioPreviewing() != mAudioPreviewCheckBox.isChecked()) {
-            mAudioPreviewCheckBox.setChecked(mStreamer.isAudioPreviewing());
-        }
         mStreamer.setOnInfoListener(mOnInfoListener);
         mStreamer.setOnErrorListener(mOnErrorListener);
         mStreamer.setOnLogEventListener(mOnLogEventListener);
@@ -341,6 +345,7 @@ public class CameraActivity extends Activity implements
         if (mStreamer.getVideoEncodeMethod() == StreamerConstants.ENCODE_METHOD_SOFTWARE_COMPAT) {
             mBeautyCheckBox.setChecked(true);
         }
+
         mStreamer.getImgTexFilterMgt().setOnErrorListener(new ImgTexFilterBase.OnErrorListener() {
             @Override
             public void onError(ImgTexFilterBase filter, int errno) {
@@ -351,6 +356,8 @@ public class CameraActivity extends Activity implements
             }
         });
 
+        mStreamer.getImgTexFilterMgt().setFilter(new AiyaWrapFilter(mStreamer.getGLRender(),
+                new EffectFilter(getResources())));
         // add RGBA buffer filter to ImgTexFilterMgt, this would cause performance drop,
         // only valid after Android 4.4
         //RGBABufDemoFilter demoFilter = new RGBABufDemoFilter(mStreamer.getGLRender());
@@ -365,9 +372,15 @@ public class CameraActivity extends Activity implements
     }
 
     private void initBeautyUI() {
-        String[] items = new String[]{"DISABLE", "BEAUTY_SOFT", "SKIN_WHITEN", "BEAUTY_ILLUSION",
-                "BEAUTY_DENOISE", "BEAUTY_SMOOTH", "BEAUTY_PRO", "DEMO_FILTER", "GROUP_FILTER",
-                "ToneCurve", "复古", "胶片"};
+        mAiyaMenu=new AiyaMenu(this);
+        mAiyaMenu.readMenu("modelsticker/stickers.json");
+//        String[] items = new String[]{"DISABLE", "BEAUTY_SOFT", "SKIN_WHITEN", "BEAUTY_ILLUSION",
+//                "BEAUTY_DENOISE", "BEAUTY_SMOOTH", "BEAUTY_PRO", "DEMO_FILTER", "GROUP_FILTER",
+//                "ToneCurve", "复古", "胶片","哎吖特效"};
+        List<String> items=new ArrayList<>();
+        for (AiyaMenu.MenuBean bean:mAiyaMenu.getMenuList()){
+            items.add(bean.name);
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -378,96 +391,116 @@ public class CameraActivity extends Activity implements
                 TextView textView = ((TextView) parent.getChildAt(0));
                 if (textView != null) {
                     textView.setTextColor(getResources().getColor(R.color.font_color_35));
-                }
-                if (position == 0) {
-                    mStreamer.getImgTexFilterMgt().setFilter((ImgFilterBase) null);
-                } else if (position <= 5) {
-                    mStreamer.getImgTexFilterMgt().setFilter(
-                            mStreamer.getGLRender(), position + 15);
-                } else if (position == 6) {
-                    mStreamer.getImgTexFilterMgt().setFilter(mStreamer.getGLRender(),
-                            ImgTexFilterMgt.KSY_FILTER_BEAUTY_PRO);
-                } else if (position == 7) {
-                    mStreamer.getImgTexFilterMgt().setFilter(
-                            new DemoFilter(mStreamer.getGLRender()));
-                } else if (position == 8) {
-                    List<ImgFilterBase> groupFilter = new LinkedList<>();
-                    groupFilter.add(new DemoFilter2(mStreamer.getGLRender()));
-                    groupFilter.add(new DemoFilter3(mStreamer.getGLRender()));
-                    groupFilter.add(new DemoFilter4(mStreamer.getGLRender()));
-                    mStreamer.getImgTexFilterMgt().setFilter(groupFilter);
-                } else if (position == 9) {
-                    ImgBeautyToneCurveFilter acvFilter = new ImgBeautyToneCurveFilter(mStreamer.getGLRender());
-                    acvFilter.setFromCurveFileInputStream(
-                            CameraActivity.this.getResources().openRawResource(R.raw.tone_cuver_sample));
-
-                    mStreamer.getImgTexFilterMgt().setFilter(acvFilter);
-                } else if (position == 10) {
-                    ImgBeautyToneCurveFilter acvFilter = new ImgBeautyToneCurveFilter(mStreamer.getGLRender());
-                    acvFilter.setFromCurveFileInputStream(
-                            CameraActivity.this.getResources().openRawResource(R.raw.fugu));
-
-                    mStreamer.getImgTexFilterMgt().setFilter(acvFilter);
-                } else if (position == 11) {
-                    ImgBeautyToneCurveFilter acvFilter = new ImgBeautyToneCurveFilter(mStreamer.getGLRender());
-                    acvFilter.setFromCurveFileInputStream(
-                            CameraActivity.this.getResources().openRawResource(R.raw.jiaopian));
-
-                    mStreamer.getImgTexFilterMgt().setFilter(acvFilter);
-                }
-                List<ImgFilterBase> filters = mStreamer.getImgTexFilterMgt().getFilter();
-                if (filters != null && !filters.isEmpty()) {
-                    final ImgFilterBase filter = filters.get(0);
-                    mBeautyGrindLayout.setVisibility(filter.isGrindRatioSupported() ?
-                            View.VISIBLE : View.GONE);
-                    mBeautyWhitenLayout.setVisibility(filter.isWhitenRatioSupported() ?
-                            View.VISIBLE : View.GONE);
-                    mBeautyRuddyLayout.setVisibility(filter.isRuddyRatioSupported() ?
-                            View.VISIBLE : View.GONE);
-                    SeekBar.OnSeekBarChangeListener seekBarChangeListener =
-                            new SeekBar.OnSeekBarChangeListener() {
-                                @Override
-                                public void onProgressChanged(SeekBar seekBar, int progress,
-                                                              boolean fromUser) {
-                                    if (!fromUser) {
-                                        return;
-                                    }
-                                    float val = progress / 100.f;
-                                    if (seekBar == mGrindSeekBar) {
-                                        filter.setGrindRatio(val);
-                                    } else if (seekBar == mWhitenSeekBar) {
-                                        filter.setWhitenRatio(val);
-                                    } else if (seekBar == mRuddySeekBar) {
-                                        if (filter instanceof ImgBeautyProFilter) {
-                                            val = progress / 50.f - 1.0f;
-                                        }
-                                        filter.setRuddyRatio(val);
-                                    }
-                                }
-
-                                @Override
-                                public void onStartTrackingTouch(SeekBar seekBar) {
-                                }
-
-                                @Override
-                                public void onStopTrackingTouch(SeekBar seekBar) {
-                                }
-                            };
-                    mGrindSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
-                    mWhitenSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
-                    mRuddySeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
-                    mGrindSeekBar.setProgress((int)(filter.getGrindRatio() * 100));
-                    mWhitenSeekBar.setProgress((int)(filter.getWhitenRatio() * 100));
-                    int ruddyVal = (int)(filter.getRuddyRatio() * 100);
-                    if (filter instanceof ImgBeautyProFilter) {
-                        ruddyVal = (int)(filter.getRuddyRatio() * 50 + 50);
+                    String now=textView.getText().toString();
+                    for (AiyaMenu.MenuBean bean:mAiyaMenu.getMenuList()){
+                        if(bean.name.equals(now)){
+                            if(bean.path!=null){
+                                mEffect="assets/modelsticker/"+bean.path;
+                                AiyaEffects.getInstance().setEffect(mEffect);
+                            }else{
+                                mEffect=null;
+                                AiyaEffects.getInstance().setEffect(null);
+                            }
+                            break;
+                        }
                     }
-                    mRuddySeekBar.setProgress(ruddyVal);
-                } else {
-                    mBeautyGrindLayout.setVisibility(View.GONE);
-                    mBeautyWhitenLayout.setVisibility(View.GONE);
-                    mBeautyRuddyLayout.setVisibility(View.GONE);
                 }
+//                if (position == 0) {
+//                    mStreamer.getImgTexFilterMgt().setFilter((ImgFilterBase) null);
+//                } else if (position <= 5) {
+//                    mStreamer.getImgTexFilterMgt().setFilter(
+//                            mStreamer.getGLRender(), position + 15);
+//                } else if (position == 6) {
+//                    mStreamer.getImgTexFilterMgt().setFilter(mStreamer.getGLRender(),
+//                            ImgTexFilterMgt.KSY_FILTER_BEAUTY_PRO);
+//                } else if (position == 7) {
+//                    mStreamer.getImgTexFilterMgt().setFilter(
+//                            new DemoFilter(mStreamer.getGLRender()));
+//                } else if (position == 8) {
+//                    List<ImgFilterBase> groupFilter = new LinkedList<>();
+//                    groupFilter.add(new DemoFilter2(mStreamer.getGLRender()));
+//                    groupFilter.add(new DemoFilter3(mStreamer.getGLRender()));
+//                    groupFilter.add(new DemoFilter4(mStreamer.getGLRender()));
+//                    mStreamer.getImgTexFilterMgt().setFilter(groupFilter);
+//                } else if (position == 9) {
+//                    ImgBeautyToneCurveFilter acvFilter = new ImgBeautyToneCurveFilter(mStreamer.getGLRender());
+//                    acvFilter.setFromCurveFileInputStream(
+//                            CameraActivity.this.getResources().openRawResource(R.raw.tone_cuver_sample));
+//
+//                    mStreamer.getImgTexFilterMgt().setFilter(acvFilter);
+//                } else if (position == 10) {
+//                    ImgBeautyToneCurveFilter acvFilter = new ImgBeautyToneCurveFilter(mStreamer.getGLRender());
+//                    acvFilter.setFromCurveFileInputStream(
+//                            CameraActivity.this.getResources().openRawResource(R.raw.fugu));
+//
+//                    mStreamer.getImgTexFilterMgt().setFilter(acvFilter);
+//                } else if (position == 11) {
+//                    ImgBeautyToneCurveFilter acvFilter = new ImgBeautyToneCurveFilter(mStreamer.getGLRender());
+//                    acvFilter.setFromCurveFileInputStream(
+//                            CameraActivity.this.getResources().openRawResource(R.raw.jiaopian));
+//
+//                    mStreamer.getImgTexFilterMgt().setFilter(acvFilter);
+//                }else if(position==12){
+////                    mStreamer.getImgTexFilterMgt().setFilter(new EffectFilter(mStreamer.getGLRender(),getResources()));
+////                    mStreamer.getImgTexFilterMgt().setFilter(new AiyaWrapFilter(mStreamer.getGLRender(),
+////                            new GrayFilter(getResources())));
+//                    mStreamer.getImgTexFilterMgt().setFilter(new AiyaWrapFilter(mStreamer.getGLRender(),
+//                            new AiyaEffectFilter(getResources())));
+//                }
+//                List<ImgFilterBase> filters = mStreamer.getImgTexFilterMgt().getFilter();
+//                if (filters != null && !filters.isEmpty()) {
+//                    final ImgFilterBase filter = filters.get(0);
+//                    mBeautyGrindLayout.setVisibility(filter.isGrindRatioSupported() ?
+//                            View.VISIBLE : View.GONE);
+//                    mBeautyWhitenLayout.setVisibility(filter.isWhitenRatioSupported() ?
+//                            View.VISIBLE : View.GONE);
+//                    mBeautyRuddyLayout.setVisibility(filter.isRuddyRatioSupported() ?
+//                            View.VISIBLE : View.GONE);
+//                    SeekBar.OnSeekBarChangeListener seekBarChangeListener =
+//                            new SeekBar.OnSeekBarChangeListener() {
+//                        @Override
+//                        public void onProgressChanged(SeekBar seekBar, int progress,
+//                                                      boolean fromUser) {
+//                            if (!fromUser) {
+//                                return;
+//                            }
+//                            float val = progress / 100.f;
+//                            if (seekBar == mGrindSeekBar) {
+//                                filter.setGrindRatio(val);
+//                            } else if (seekBar == mWhitenSeekBar) {
+//                                filter.setWhitenRatio(val);
+//                            } else if (seekBar == mRuddySeekBar) {
+//                                if (filter instanceof ImgBeautyProFilter) {
+//                                    val = progress / 50.f - 1.0f;
+//                                }
+//                                filter.setRuddyRatio(val);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onStartTrackingTouch(SeekBar seekBar) {
+//                        }
+//
+//                        @Override
+//                        public void onStopTrackingTouch(SeekBar seekBar) {
+//                        }
+//                    };
+//                    mGrindSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+//                    mWhitenSeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+//                    mRuddySeekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+//                    mGrindSeekBar.setProgress((int)(filter.getGrindRatio() * 100));
+//                    mWhitenSeekBar.setProgress((int)(filter.getWhitenRatio() * 100));
+//                    int ruddyVal = (int)(filter.getRuddyRatio() * 100);
+//                    if (filter instanceof ImgBeautyProFilter) {
+//                        ruddyVal = (int)(filter.getRuddyRatio() * 50 + 50);
+//                    }
+//                    mRuddySeekBar.setProgress(ruddyVal);
+//                } else {
+//                    mBeautyGrindLayout.setVisibility(View.GONE);
+//                    mBeautyWhitenLayout.setVisibility(View.GONE);
+//                    mBeautyRuddyLayout.setVisibility(View.GONE);
+//                }
+
             }
 
             @Override
@@ -476,7 +509,7 @@ public class CameraActivity extends Activity implements
             }
         });
         mBeautySpinner.setPopupBackgroundResource(R.color.transparent1);
-        mBeautySpinner.setSelection(4);
+        mBeautySpinner.setSelection(0);
     }
 
     @Override
@@ -486,7 +519,6 @@ public class CameraActivity extends Activity implements
                 mOrientationEventListener.canDetectOrientation()) {
             mOrientationEventListener.enable();
         }
-
         startCameraPreviewWithPermCheck();
         mStreamer.onResume();
         mStreamer.setUseDummyAudioCapture(false);
@@ -791,17 +823,17 @@ public class CameraActivity extends Activity implements
                     break;
                 case StreamerConstants.KSY_STREAMER_VIDEO_ENCODER_ERROR_UNSUPPORTED:
                 case StreamerConstants.KSY_STREAMER_VIDEO_ENCODER_ERROR_UNKNOWN:
-                {
-                    handleEncodeError();
-                    stopStream();
-                    mMainHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startStream();
-                        }
-                    }, 3000);
-                }
-                break;
+                    {
+                        handleEncodeError();
+                        stopStream();
+                        mMainHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startStream();
+                            }
+                        }, 3000);
+                    }
+                    break;
                 default:
                     if(mStreamer.getEnableAutoRestart()) {
                         mShootingText.setText(START_STRING);
@@ -949,6 +981,7 @@ public class CameraActivity extends Activity implements
             mStreamer.setEnableImgBufBeauty(isChecked);
         } else {
             mBeautyChooseView.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
+            AiyaEffects.getInstance().setEffect(isChecked?mEffect:null);
         }
     }
 
@@ -984,14 +1017,7 @@ public class CameraActivity extends Activity implements
     }
 
     private void onAudioPreviewChecked(boolean isChecked) {
-        if(isChecked != mStreamer.isAudioPreviewing()) {
-            // 若没有插入耳机，该接口会设置失败，因此设置完毕后需要判断一下，进行状态复归
-            mStreamer.setEnableAudioPreview(isChecked);
-            if (isChecked != mStreamer.isAudioPreviewing()) {
-                Toast.makeText(this, "设置耳返失败，您需要插入耳机", Toast.LENGTH_SHORT).show();
-                mAudioPreviewCheckBox.setChecked(mStreamer.isAudioPreviewing());
-            }
-        }
+        mStreamer.setEnableAudioPreview(isChecked);
     }
 
     private void onMuteChecked(boolean isChecked) {

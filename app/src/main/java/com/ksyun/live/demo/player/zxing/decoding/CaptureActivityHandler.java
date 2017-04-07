@@ -25,9 +25,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.aiyaapp.aiya.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.ksyun.live.demo.R;
 import com.ksyun.live.demo.player.activity.CaptureActivity;
 import com.ksyun.live.demo.player.zxing.camera.CameraManager;
 import com.ksyun.live.demo.player.zxing.view.ViewfinderResultPointCallback;

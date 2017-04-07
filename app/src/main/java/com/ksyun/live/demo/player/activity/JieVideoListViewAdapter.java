@@ -8,10 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.model.MyVideoThumbLoader;
 import com.ksyun.live.demo.player.util.Video;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +61,6 @@ public class JieVideoListViewAdapter extends BaseAdapter {
             holder = (ViewHolder)view.getTag();
         }
         String path = listVideos.get(i).getPath();
-
         File file = new File(path);
         if(file.isDirectory()){
             holder.img.setImageResource(R.drawable.file);

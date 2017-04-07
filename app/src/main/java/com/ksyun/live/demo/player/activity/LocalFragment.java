@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.model.GetList;
 import com.ksyun.live.demo.player.util.Settings;
 import com.ksyun.live.demo.player.util.Video;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -55,7 +55,7 @@ public class LocalFragment extends android.app.Fragment implements SwipeRefreshL
 
         showListVideos = new ArrayList<Video>();
         getList = new GetList();
-        mHandler = new Handler() {
+        mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -106,6 +106,9 @@ public class LocalFragment extends android.app.Fragment implements SwipeRefreshL
                     msg.what = UPDATE;
                     mHandler.sendMessageDelayed(msg, 500);
                 } else {
+                    if (settings == null){
+                        Log.e("WSC", "find setting is null");
+                    }
                     String playerType = settings.getString("choose_type", Settings.LIVE);
                     if (playerType.equals(Settings.VOD)) {
                         Intent intent = new Intent(getActivity(), TextureVodActivity.class);
@@ -115,12 +118,8 @@ public class LocalFragment extends android.app.Fragment implements SwipeRefreshL
                         Intent intent = new Intent(getActivity(), TextureVideoActivity.class);
                         intent.putExtra("path", v.getPath());
                         startActivity(intent);
-                    } else if (playerType.equals(Settings.FLOATING)){
-                        Intent intent = new Intent(getActivity(), FloatingVideoActivity.class);
-                        intent.putExtra("path", v.getPath());
-                        startActivity(intent);
                     } else {
-                        Intent intent = new Intent(getActivity(), PlayRecordActivity.class);
+                        Intent intent = new Intent(getActivity(), FloatingVideoActivity.class);
                         intent.putExtra("path", v.getPath());
                         startActivity(intent);
                     }
@@ -138,7 +137,7 @@ public class LocalFragment extends android.app.Fragment implements SwipeRefreshL
         listView.setAdapter(mAdapter);
     }
 
-    public void setSettings(SharedPreferences set) {
+    public void setSettings( SharedPreferences set){
         settings = set;
     }
 
@@ -146,11 +145,11 @@ public class LocalFragment extends android.app.Fragment implements SwipeRefreshL
     public void onRefresh() {
         Message msg = new Message();
         msg.what = UPDATE;
-        mHandler.sendMessageDelayed(msg, 3000);
+        mHandler.sendMessageDelayed(msg,3000);
     }
 
-    public void onBackPressed() {
-        if (currentFile.getAbsolutePath().equals(Environment.getExternalStorageDirectory().getAbsolutePath())) {
+    public void onBackPressed(){
+        if(currentFile.getAbsolutePath().equals(Environment.getExternalStorageDirectory().getAbsolutePath())){
             getActivity().finish();
         } else {
             showListVideos.clear();
@@ -159,7 +158,8 @@ public class LocalFragment extends android.app.Fragment implements SwipeRefreshL
             localPath.setText(currentFile.getAbsolutePath());
             Message msg = new Message();
             msg.what = UPDATE;
-            mHandler.sendMessageDelayed(msg, 500);
+            mHandler.sendMessageDelayed(msg,500);
         }
     }
 }
+

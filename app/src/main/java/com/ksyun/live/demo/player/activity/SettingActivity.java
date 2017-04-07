@@ -12,48 +12,42 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
-
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.util.Settings;
 
-public class SettingActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class SettingActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
 
     public static final int PLAY_VIDEO = 0x1002;
 
-    private SharedPreferences settings;
+
+    private SharedPreferences settings ;
     private SharedPreferences.Editor editor;
     private RadioButton radioSoft;
     private RadioButton radioHard;
     private RadioButton radioLive;
     private RadioButton radioVod;
     private RadioButton radioFloating;
-    private RadioButton radioRecord;
     private Switch debugSwitch;
 
-//    private Spinner mSpinner;
 
     private RadioGroup mChooseCodec;
     private RadioGroup mChooseType;
 
     private EditText mBufferTime;
     private EditText mBufferSize;
-
-//    private String mSkin;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settings = getSharedPreferences("SETTINGS", Context.MODE_PRIVATE);
+        settings = getSharedPreferences("SETTINGS",Context.MODE_PRIVATE);
         editor = settings.edit();
-
-
         setContentView(R.layout.activity_setting);
         String chooseDecode = settings.getString("choose_decode", Settings.USESOFT);
         String chooseDebug = settings.getString("choose_debug", Settings.DEBUGON);
         String chooseType = settings.getString("choose_type", Settings.LIVE);
         String bufferTime = settings.getString("buffertime", "2");
         String bufferSize = settings.getString("buffersize", "15");
+
 
 
         mChooseCodec = (RadioGroup) findViewById(R.id.choose_codec);
@@ -128,7 +122,6 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
         radioLive = (RadioButton) findViewById(R.id.type_live);
         radioVod = (RadioButton) findViewById(R.id.type_vod);
         radioFloating = (RadioButton) findViewById(R.id.type_floating);
-        radioRecord = (RadioButton) findViewById(R.id.type_record);
 
         mBufferSize.setText(bufferSize);
         mBufferTime.setText(bufferTime);
@@ -168,15 +161,13 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
             case Settings.FLOATING:
                 mChooseType.check(radioFloating.getId());
                 break;
-            case Settings.RECORD:
-                mChooseType.check(radioRecord.getId());
-                break;
             default:
                 mChooseType.check(radioLive.getId());
                 editor.putString("choose_type", Settings.LIVE);
                 break;
         }
         editor.commit();
+
     }
 
 
@@ -197,9 +188,6 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
                 break;
             case R.id.type_floating:
                 editor.putString("choose_type", Settings.FLOATING);
-                break;
-            case R.id.type_record:
-                editor.putString("choose_type", Settings.RECORD);
                 break;
             default:
                 break;

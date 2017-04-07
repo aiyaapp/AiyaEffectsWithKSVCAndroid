@@ -6,6 +6,7 @@
             android:id="@+id/local_path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="aaaa"
             android:textSize="16sp"
             android:textColor="@color/player_blue2"
             android:layout_margin="12dp"/>
@@ -22,5 +23,7 @@
                 </ListView>
 
         </android.support.v4.widget.SwipeRefreshLayout>
+
+
 
 </LinearLayout>

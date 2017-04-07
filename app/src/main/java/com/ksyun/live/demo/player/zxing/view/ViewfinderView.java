@@ -25,8 +25,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.aiyaapp.aiya.R;
 import com.google.zxing.ResultPoint;
-import com.ksyun.live.demo.R;
 import com.ksyun.live.demo.player.zxing.camera.CameraManager;
 
 import java.util.Collection;

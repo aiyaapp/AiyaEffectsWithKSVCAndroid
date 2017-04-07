@@ -26,8 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 
 import static android.content.ContentValues.TAG;
 

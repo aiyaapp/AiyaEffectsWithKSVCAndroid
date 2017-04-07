@@ -1,8 +1,8 @@
 package com.ksyun.media.streamer.demo;
 
-import com.ksyun.live.demo.R;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -15,12 +15,23 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
+import com.aiyaapp.aiya.R;
+import com.aiyaapp.camera.sdk.AiyaEffects;
+import com.aiyaapp.camera.sdk.base.Event;
+import com.aiyaapp.camera.sdk.base.ActionObserver;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.exceptions.HyphenateException;
 import com.ksyun.media.streamer.encoder.VideoEncodeFormat;
 import com.ksyun.media.streamer.framework.AVConst;
 import com.ksyun.media.streamer.kit.StreamerConstants;
 import com.ksyun.media.streamer.util.device.DeviceInfo;
 import com.ksyun.media.streamer.util.device.DeviceInfoTools;
+import java.util.List;
 
 public class DemoActivity extends Activity
         implements OnClickListener, RadioGroup.OnCheckedChangeListener{
@@ -59,13 +70,73 @@ public class DemoActivity extends Activity
     private CheckBox mShowDebugInfoCheckBox;
 
     private DeviceInfo mDeviceInfo;
-    private boolean mShowDeviceToast = false;
+    private static boolean mShowDeviceToast = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity);
+
+        //EMOptions options = new EMOptions();
+        //options.setAcceptInvitationAlways(true);
+        ////初始化
+        //EMClient.getInstance().init(getApplicationContext(), options);
+        ////在做打包混淆时，关闭debug模式，避免消耗不必要的资源
+        //EMClient.getInstance().setDebugMode(true);
+        //new Thread(new Runnable() {
+        //    @Override
+        //    public void run() {
+        //        try {
+        //            EMClient.getInstance().createAccount(Build.SERIAL, "123456");
+        //        } catch (HyphenateException e) {
+        //            e.printStackTrace();
+        //        }
+        //        EMClient.getInstance().login(Build.SERIAL, "123456", new EMCallBack() {
+        //            @Override
+        //            public void onSuccess() {
+        //                Log.e("aiya","登录成功");
+        //            }
+        //
+        //            @Override
+        //            public void onError(int code, String error) {
+        //                Log.e("aiya","登录出错");
+        //            }
+        //
+        //            @Override
+        //            public void onProgress(int progress, String status) {
+        //                Log.e("aiya","process-->"+progress+status);
+        //            }
+        //        });
+        //    }
+        //}).start();
+
+
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
+
+        final ActionObserver observer = new ActionObserver() {
+            @Override
+            public void onAction(Event state) {
+                switch (state.eventType){
+                    case Event.RESOURCE_FAILED:
+                        com.aiyaapp.camera.sdk.base.Log.e("resource failed");
+                        break;
+                    case Event.INIT_FAILED:
+                        com.aiyaapp.camera.sdk.base.Log.e("init failed");
+                        Toast.makeText(DemoActivity.this, "注册失败，请检查网络", Toast.LENGTH_SHORT)
+                            .show();
+                        AiyaEffects.getInstance().unRegisterObserver(this);
+                        break;
+                    case Event.INIT_SUCCESS:
+                        com.aiyaapp.camera.sdk.base.Log.e("init success");
+                        AiyaEffects.getInstance().unRegisterObserver(this);
+                        break;
+                }
+            }
+        };
+        AiyaEffects.getInstance().registerObserver(observer);
+        AiyaEffects.getInstance().init(DemoActivity.this, getExternalFilesDir(null)
+                .getAbsolutePath() + "/146-563-918-415-578-677-783-748-043-705-956.vlc", "");
 
         mConnectButton = (Button) findViewById(R.id.connectBT);
         mConnectButton.setOnClickListener(this);
@@ -105,6 +176,43 @@ public class DemoActivity extends Activity
         mEncodeGroup.setOnCheckedChangeListener(this);
     }
 
+    EMMessageListener msgListener = new EMMessageListener() {
+
+        @Override
+        public void onMessageReceived(List<EMMessage> messages) {
+            //收到消息
+            for (EMMessage msg:messages){
+                if(msg.getBody() instanceof EMTextMessageBody){
+                    if(msg.getStringAttribute("gift","").equals("gift")){
+                        String giftId=((EMTextMessageBody)msg.getBody()).getMessage();
+                        Log.e("aiya",giftId);
+                        AiyaEffects.getInstance().setEffect("assets/modelsticker/"+giftId+"/meta.json");
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> messages) {
+            //收到透传消息
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> messages) {
+            //收到已读回执
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> message) {
+            //收到已送达回执
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage message, Object change) {
+            //消息状态变动
+        }
+    };
+
     @Override
     public void onResume() {
         super.onResume();
@@ -112,20 +220,17 @@ public class DemoActivity extends Activity
         //若在硬编白名单中存在设备信息，则参考白名单信息进行配置
         DeviceInfo lastDeviceInfo = mDeviceInfo;
         mDeviceInfo = DeviceInfoTools.getInstance().getDeviceInfo();
-        if(mDeviceInfo != null) {
-            Log.i(TAG, "deviceInfo:" + mDeviceInfo.printDeviceInfo());
-            if (!mShowDeviceToast || (lastDeviceInfo != null && !mDeviceInfo.compareDeviceInfo
-                    (lastDeviceInfo))) {
-                if (mDeviceInfo.encode_h264 == DeviceInfo.ENCODE_HW_SUPPORT) {
-                    //支持硬编，建议使用硬编
-                    mHWButton.setChecked(true);
-                    Toast.makeText(this, "该设备支持h264硬编，建议您使用硬编", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(this, "该设备可能不在硬编白名单中\n或者不支持硬编\n或者服务器还未返回" +
-                            "\n如果支持硬编，欢迎一起更新白名单", Toast.LENGTH_SHORT).show();
-                }
-                mShowDeviceToast = true;
+        Log.i(TAG, "deviceInfo:" +  mDeviceInfo.printDeviceInfo());
+        if(!mShowDeviceToast || !mDeviceInfo.compareDeviceInfo(lastDeviceInfo)) {
+            if (mDeviceInfo.encode_h264 == DeviceInfo.ENCODE_HW_SUPPORT) {
+                //支持硬编，建议使用硬编
+                mHWButton.setChecked(true);
+                Toast.makeText(this, "该设备支持h264硬编，建议您使用硬编", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "该设备可能不在硬编白名单中\n或者不支持硬编\n或者服务器还未返回" +
+                        "\n如果支持硬编，欢迎一起更新白名单", Toast.LENGTH_SHORT).show();
             }
+            mShowDeviceToast = true;
         }
     }
     
@@ -143,6 +248,8 @@ public class DemoActivity extends Activity
             setEnableRadioGroup(mSceneGroup, true);
             setEnableRadioGroup(mProfileGroup, true);
         }
+
+        mUrlEditText.setText(getString(R.string.test_addr,Build.SERIAL));
     }
 
     @Override
@@ -250,5 +357,6 @@ public class DemoActivity extends Activity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EMClient.getInstance().chatManager().removeMessageListener(msgListener);
     }
 }

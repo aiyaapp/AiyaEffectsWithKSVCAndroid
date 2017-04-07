@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +19,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.model.NetDbAdapter;
 import com.ksyun.live.demo.player.util.Settings;
-
 import java.util.ArrayList;
 
 
-public class NetMediaActivty extends AppCompatActivity implements View.OnClickListener {
+public class NetMediaActivty extends AppCompatActivity implements View.OnClickListener{
     private Button netHistory;
     private Button netScan;
     private Button netStartVideo;
@@ -38,6 +38,8 @@ public class NetMediaActivty extends AppCompatActivity implements View.OnClickLi
     private Cursor cursor;
     private NetDbAdapter NetDb;
     private SharedPreferences settings;
+
+    private String roomId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class NetMediaActivty extends AppCompatActivity implements View.OnClickLi
 
         final String[] sampleUrl = {"rtmp://live.hkstv.hk.lxdns.com/live/hks",
                 "http://playback.ks.zb.mi.com/record/live/107578_1467605748/hls/107578_1467605748.m3u8",
-                "http://cxy.kssws.ks-cdn.com/h265_56c26b7a7dc5f6043.mp4"};
+                "rtmp://120.25.237.18:1935/live/###"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, sampleUrl);
         netList.setAdapter(adapter);
@@ -68,6 +70,10 @@ public class NetMediaActivty extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View view) {
                 String path = textUrl.getText().toString();
+                if(path.contains("###")){
+                    roomId=path.substring(path.lastIndexOf("###")+3);
+                }
+                Log.e("aiya",roomId+"\n"+path);
                 NetDb = new NetDbAdapter(NetMediaActivty.this);
                 NetDb.open();
 
@@ -78,7 +84,6 @@ public class NetMediaActivty extends AppCompatActivity implements View.OnClickLi
                 }
                 NetDb.close();
                 String playerType = settings.getString("choose_type", Settings.LIVE);
-                Log.e("asadasdas",playerType);
                 if (playerType.equals(Settings.VOD)) {
                     Intent intent = new Intent(NetMediaActivty.this, TextureVodActivity.class);
                     intent.putExtra("path", path);
@@ -88,18 +93,14 @@ public class NetMediaActivty extends AppCompatActivity implements View.OnClickLi
                     intent.putExtra("path", path);
                     startActivity(intent);
 
-                } else if (playerType.equals(Settings.FLOATING)){
-                    Intent intent = new Intent(NetMediaActivty.this, FloatingVideoActivity.class);
-                    intent.putExtra("path", path);
-                    startActivity(intent);
                 } else {
-                    Intent intent = new Intent(NetMediaActivty.this, PlayRecordActivity.class);
+                    Intent intent = new Intent(NetMediaActivty.this, FloatingVideoActivity.class);
                     intent.putExtra("path", path);
                     startActivity(intent);
                 }
             }
         });
-        setActionBarLayout(R.layout.net_actionbar, this);
+        setActionBarLayout(R.layout.net_actionbar,this);
     }
 
     public void setActionBarLayout(int layoutId, Context mContext) {
@@ -122,7 +123,7 @@ public class NetMediaActivty extends AppCompatActivity implements View.OnClickLi
             netHistory.setOnClickListener(this);
             netSetting.setOnClickListener(this);
 
-        } else {
+        }else{
             Toast.makeText(NetMediaActivty.this, "ActionBar不存在", Toast.LENGTH_SHORT).show();
         }
 

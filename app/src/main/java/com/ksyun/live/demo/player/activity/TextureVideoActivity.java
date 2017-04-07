@@ -21,8 +21,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ksyun.live.demo.R;
-import com.ksyun.live.demo.player.record.KSYPlayerRecord;
+import com.aiyaapp.aiya.R;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.ksyun.live.demo.player.model.NetState;
 import com.ksyun.live.demo.player.model.Strings;
 import com.ksyun.live.demo.player.util.NetStateUtil;
@@ -36,13 +37,12 @@ import com.ksyun.media.player.KSYMediaMeta;
 import com.ksyun.media.player.KSYMediaPlayer;
 import com.ksyun.media.player.KSYTextureView;
 import com.ksyun.media.player.misc.KSYQosInfo;
-import com.ksyun.media.streamer.kit.StreamerConstants;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Timer;
@@ -52,7 +52,7 @@ import java.util.TimerTask;
 /**
  * Created by shichang on 9/23/16.
  */
-public class TextureVideoActivity extends Activity implements View.OnClickListener {
+public class TextureVideoActivity extends Activity implements View.OnClickListener{
 
     private static final String TAG = "TextureVideoActivity";
 
@@ -146,6 +146,7 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
 
             if (mQosThread != null && !mQosThread.isAlive())
                 mQosThread.start();
+
 
             if (mVideoView.getServerAddress() != null)
                 mServerIp.setText("ServerIP: " + mVideoView.getServerAddress());
@@ -351,7 +352,6 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
         mPlayerRotate = (ImageView) findViewById(R.id.player_rotate);
         mPlayerScreen = (ImageView) findViewById(R.id.player_screen);
         mPlayerScale = (ImageView) findViewById(R.id.player_scale);
-        mute = (Button) findViewById(R.id.btn_mute_player);
         mirror = (ImageView) findViewById(R.id.player_mirror);
         mirror.setOnClickListener(this);
         mPlayerReload.setOnClickListener(this);
@@ -363,7 +363,6 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
         mProgressTextView = (ProgressTextView) findViewById(R.id.ptv_open_percentage);
         mAudioSeekbar.setProgress(100);
         mAudioSeekbar.setOnSeekBarChangeListener(audioSeekbarListener);
-
 
         mPlayerStartBtn.setOnClickListener(mStartBtnListener);
         mPlayerVolume.setOnClickListener(this);
@@ -436,7 +435,6 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
         bufferTime = settings.getString("buffertime", "2");
         bufferSize = settings.getString("buffersize", "15");
 
-
         if (!TextUtils.isEmpty(bufferTime)) {
             mVideoView.setBufferTimeMax(Integer.parseInt(bufferTime));
             Log.e(TAG, "palyer buffertime :" + bufferTime);
@@ -446,12 +444,12 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
             mVideoView.setBufferSize(Integer.parseInt(bufferSize));
             Log.e(TAG, "palyer buffersize :" + bufferSize);
         }
-
         if (chooseDecode.equals(Settings.USEHARD)) {
             useHwCodec = true;
         } else {
             useHwCodec = false;
         }
+
 
         if (useHwCodec) {
             //硬解264&265
@@ -509,7 +507,6 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
             mVideoView.runInForeground();
         }
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -553,6 +550,7 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
     private void updateQosInfo(QosObject obj) {
         cpuUsage = obj.cpuUsage;
         pss = obj.pss;
+
 
         if (mVideoView != null) {
             bits = mVideoView.getDecodedDataSize() * 8 / (mPause ? mPauseStartTime - mPausedTime - mStartTime : System.currentTimeMillis() - mPausedTime - mStartTime);
@@ -653,6 +651,7 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
         }
     };
 
+
     @Override
     public void onClick(View view) {
         mHandler.removeMessages(HIDDEN_SEEKBAR);
@@ -694,8 +693,33 @@ public class TextureVideoActivity extends Activity implements View.OnClickListen
                 }
             }
             break;
+            case R.id.mDabai:
+                sendGift("dabai");
+                break;
+            case R.id.mTaoyuan:
+                sendGift("shiwaitaoyuan");
+                break;
+            case R.id.mXiaocao:
+                sendGift("grass");
+                break;
+            case R.id.mLanse:
+                sendGift("lanseyaoji");
+                break;
             default:
                 break;
+        }
+    }
+
+    public void sendGift(String giftName){
+        String path=getIntent().getStringExtra("path");
+        String room=path.substring(path.lastIndexOf("###")+3);
+        if(room.length()>0){
+            EMMessage message = EMMessage.createTxtSendMessage(giftName, room);
+            message.setAttribute("gift","gift");
+            EMClient.getInstance().chatManager().sendMessage(message);
+            Toast.makeText(this,"礼物发送成功",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this,"请输入直播房间ID",Toast.LENGTH_SHORT).show();
         }
     }
 

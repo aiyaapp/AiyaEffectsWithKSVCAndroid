@@ -20,7 +20,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.media.player.IMediaController;
 import java.lang.ref.WeakReference;
 import java.util.Formatter;

@@ -22,7 +22,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ksyun.live.demo.R;
+import com.aiyaapp.aiya.R;
 import com.ksyun.live.demo.player.model.NetState;
 import com.ksyun.live.demo.player.model.Strings;
 import com.ksyun.live.demo.player.record.KSYPlayerRecord;

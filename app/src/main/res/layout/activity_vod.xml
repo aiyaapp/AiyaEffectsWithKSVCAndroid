@@ -148,7 +148,6 @@
         android:layout_above="@+id/player_panel"
         android:layout_alignParentRight="true"
         android:visibility="gone">
-
         <ImageView
             android:id="@+id/player_screen"
             android:layout_width="35dp"
@@ -169,7 +168,7 @@
             android:background="@drawable/rotate" />
 
 
-        <com.ksyun.live.demo.player.util.ProgressTextView
+        <com.ksyun.player.demo.util.ProgressTextView
             android:id="@+id/ptv_open_percentage"
             android:layout_width="40dp"
             android:layout_height="140dp"
@@ -181,7 +180,7 @@
             custom:ptv_thumHeight="8dp"
             custom:ptv_thumWidth="12dp" />
 
-        <com.ksyun.live.demo.player.util.VerticalSeekBar
+        <com.ksyun.player.demo.util.VerticalSeekBar
             android:id="@+id/player_audio_seekbar"
             android:layout_width="wrap_content"
             android:layout_height="140dp"
@@ -269,5 +268,4 @@
 
 
     </RelativeLayout>
-
 </RelativeLayout>
