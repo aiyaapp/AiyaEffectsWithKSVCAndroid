@@ -19,6 +19,8 @@ import com.aiyaapp.aiya.R;
 import com.aiyaapp.camera.sdk.AiyaEffects;
 import com.aiyaapp.camera.sdk.base.Event;
 import com.aiyaapp.camera.sdk.base.ActionObserver;
+import com.aiyaapp.camera.sdk.base.ISdkManager;
+import com.aiyaapp.camera.sdk.filter.EffectFilter;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -32,9 +34,12 @@ import com.ksyun.media.streamer.kit.StreamerConstants;
 import com.ksyun.media.streamer.util.device.DeviceInfo;
 import com.ksyun.media.streamer.util.device.DeviceInfoTools;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.Semaphore;
 
 public class DemoActivity extends Activity
-        implements OnClickListener, RadioGroup.OnCheckedChangeListener{
+        implements OnClickListener, RadioGroup.OnCheckedChangeListener,Runnable{
     private static final String TAG = DemoActivity.class.getSimpleName();
     private Button mConnectButton;
     private EditText mUrlEditText;
@@ -72,45 +77,15 @@ public class DemoActivity extends Activity
     private DeviceInfo mDeviceInfo;
     private static boolean mShowDeviceToast = false;
 
+    private BlockingQueue<String> effectQueue=new LinkedBlockingDeque<>();
+    private boolean isDestroyed=false;
+    private Semaphore mGiftSem=new Semaphore(1,true);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo_activity);
-
-        //EMOptions options = new EMOptions();
-        //options.setAcceptInvitationAlways(true);
-        ////初始化
-        //EMClient.getInstance().init(getApplicationContext(), options);
-        ////在做打包混淆时，关闭debug模式，避免消耗不必要的资源
-        //EMClient.getInstance().setDebugMode(true);
-        //new Thread(new Runnable() {
-        //    @Override
-        //    public void run() {
-        //        try {
-        //            EMClient.getInstance().createAccount(Build.SERIAL, "123456");
-        //        } catch (HyphenateException e) {
-        //            e.printStackTrace();
-        //        }
-        //        EMClient.getInstance().login(Build.SERIAL, "123456", new EMCallBack() {
-        //            @Override
-        //            public void onSuccess() {
-        //                Log.e("aiya","登录成功");
-        //            }
-        //
-        //            @Override
-        //            public void onError(int code, String error) {
-        //                Log.e("aiya","登录出错");
-        //            }
-        //
-        //            @Override
-        //            public void onProgress(int progress, String status) {
-        //                Log.e("aiya","process-->"+progress+status);
-        //            }
-        //        });
-        //    }
-        //}).start();
-
 
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
 
@@ -125,11 +100,12 @@ public class DemoActivity extends Activity
                         com.aiyaapp.camera.sdk.base.Log.e("init failed");
                         Toast.makeText(DemoActivity.this, "注册失败，请检查网络", Toast.LENGTH_SHORT)
                             .show();
-                        AiyaEffects.getInstance().unRegisterObserver(this);
                         break;
                     case Event.INIT_SUCCESS:
                         com.aiyaapp.camera.sdk.base.Log.e("init success");
-                        AiyaEffects.getInstance().unRegisterObserver(this);
+                        break;
+                    case Event.PROCESS_END:
+                        mGiftSem.release();
                         break;
                 }
             }
@@ -137,6 +113,7 @@ public class DemoActivity extends Activity
         AiyaEffects.getInstance().registerObserver(observer);
         AiyaEffects.getInstance().init(DemoActivity.this, getExternalFilesDir(null)
                 .getAbsolutePath() + "/146-563-918-415-578-677-783-748-043-705-956.vlc", "");
+        AiyaEffects.getInstance().set(ISdkManager.SET_MODE,ISdkManager.MODE_GIFT);
 
         mConnectButton = (Button) findViewById(R.id.connectBT);
         mConnectButton.setOnClickListener(this);
@@ -174,6 +151,10 @@ public class DemoActivity extends Activity
         updateUI();
         mEncodeTypeGroup.setOnCheckedChangeListener(this);
         mEncodeGroup.setOnCheckedChangeListener(this);
+
+        isDestroyed=false;
+        Thread mThread=new Thread(this);
+        mThread.start();
     }
 
     EMMessageListener msgListener = new EMMessageListener() {
@@ -186,7 +167,8 @@ public class DemoActivity extends Activity
                     if(msg.getStringAttribute("gift","").equals("gift")){
                         String giftId=((EMTextMessageBody)msg.getBody()).getMessage();
                         Log.e("aiya",giftId);
-                        AiyaEffects.getInstance().setEffect("assets/modelsticker/"+giftId+"/meta.json");
+                        //AiyaEffects.getInstance().setEffect("assets/modelsticker/"+giftId+"/meta.json");
+                        effectQueue.add("assets/modelsticker/"+giftId+"/meta.json");
                     }
                 }
             }
@@ -357,6 +339,21 @@ public class DemoActivity extends Activity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        isDestroyed=true;
+        effectQueue.clear();
         EMClient.getInstance().chatManager().removeMessageListener(msgListener);
+    }
+
+    @Override
+    public void run() {
+        while (!isDestroyed){
+            try {
+                mGiftSem.acquire();
+                String gift=effectQueue.take();
+                AiyaEffects.getInstance().setEffect(gift);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
