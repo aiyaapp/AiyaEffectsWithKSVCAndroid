@@ -203,7 +203,7 @@ public class DemoActivity extends Activity
         DeviceInfo lastDeviceInfo = mDeviceInfo;
         mDeviceInfo = DeviceInfoTools.getInstance().getDeviceInfo();
         Log.i(TAG, "deviceInfo:" +  mDeviceInfo.printDeviceInfo());
-        if(!mShowDeviceToast || !mDeviceInfo.compareDeviceInfo(lastDeviceInfo)) {
+        if(!mShowDeviceToast ||lastDeviceInfo==null|| !mDeviceInfo.compareDeviceInfo(lastDeviceInfo)) {
             if (mDeviceInfo.encode_h264 == DeviceInfo.ENCODE_HW_SUPPORT) {
                 //支持硬编，建议使用硬编
                 mHWButton.setChecked(true);
