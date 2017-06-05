@@ -872,7 +872,8 @@ int string start_recording 0x7f070032
 int string status_bar_notification_info_overflow 0x7f070014
 int string stop_picture_pip 0x7f070033
 int string stop_pip 0x7f070034
-int string watermark 0x7f070035
+int string test_addr 0x7f070035
+int string watermark 0x7f070036
 int style AlertDialog_AppCompat 0x7f09008a
 int style AlertDialog_AppCompat_Light 0x7f09008b
 int style Animation_AppCompat_Dialog 0x7f09008c

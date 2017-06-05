@@ -24,4 +24,5 @@
     <string name="front_mirror">前置镜像</string>
     <string name="audio_only">音频推流</string>
 
+    <string name="test_addr">rtmp://120.25.237.18:1935/live/###%1$s</string>
 </resources>

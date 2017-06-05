@@ -443,6 +443,7 @@
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="stop_picture_pip">停止图片画中画</string>
     <string name="stop_pip">停止画中画</string>
+    <string name="test_addr">rtmp://120.25.237.18:1935/live/###%1$s</string>
     <string name="watermark">水印</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

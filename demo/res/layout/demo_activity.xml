@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rtmpTxt"
-            android:text="rtmp://test.uplive.ks-cdn.com/live/androidtest" />
+            android:text="" />
 
         <Button
             android:id="@+id/connectBT"

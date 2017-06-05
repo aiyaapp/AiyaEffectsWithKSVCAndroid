@@ -2175,7 +2175,8 @@ containing a value of this type.
         public static final int status_bar_notification_info_overflow=0x7f070014;
         public static final int stop_picture_pip=0x7f070033;
         public static final int stop_pip=0x7f070034;
-        public static final int watermark=0x7f070035;
+        public static final int test_addr=0x7f070035;
+        public static final int watermark=0x7f070036;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09008a;

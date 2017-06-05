@@ -1,10 +1,12 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:2:1-60:12
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:2:1-94:12
 	package
 		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:4:11-37
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:5:5-52
 	android:versionName
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
@@ -16,158 +18,239 @@ ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:2:1-60:12
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
 	android:installLocation
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:5:11-51
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:6:11-51
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:7:5-75
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:8:5-75
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:7:22-72
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:8:22-72
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:8:5-78
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:9:5-78
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:8:22-75
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:9:22-75
 uses-permission#android.permission.INTERNET
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:9:5-67
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:10:5-67
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:9:22-64
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:10:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:10:5-79
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:11:5-79
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:10:22-76
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:11:22-76
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:11:5-80
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:12:5-80
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:11:22-77
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:12:22-77
 uses-permission#android.permission.READ_PHONE_SINTERNETWIFI_STATE
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:12:5-89
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:13:5-89
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:12:22-86
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:13:22-86
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:13:5-81
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:14:5-81
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:13:22-78
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:14:22-78
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:14:5-76
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:15:5-76
+MERGED from [com.hyphenate:hyphenate-sdk-lite:3.3.0] C:\Users\aiya\.android\build-cache\28d3c78149142e954dfff162d5593b128b271c77\output\AndroidManifest.xml:15:5-76
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:14:22-73
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:15:22-73
 uses-permission#android.permission.CAMERA
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:15:5-65
-MERGED from [com.github.doggycoder:AiyaEffectsAndroid:v2.0.0] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.github.doggycoder\AiyaEffectsAndroid\v2.0.0\AndroidManifest.xml:11:5-65
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:16:5-65
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:15:22-62
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:16:22-62
 uses-permission#android.permission.RECORD_AUDIO
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:16:5-71
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:17:5-71
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:16:22-68
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:17:22-68
 uses-permission#android.permission.FLASHLIGHT
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:17:5-69
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:18:5-69
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:17:22-66
-uses-feature#android.hardware.camera
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:19:5-60
-	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:19:19-57
-uses-feature#android.hardware.camera.autofocus
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:20:5-70
-	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:20:19-67
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:18:22-66
 uses-permission#android.permission.VIBRATE
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:22:5-66
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:21:5-66
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:22:22-63
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:21:22-63
+uses-permission#android.permission.ACCESS_MOCK_LOCATION
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:22:22-76
+uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:23:5-83
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:23:22-81
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:24:5-79
+MERGED from [com.hyphenate:hyphenate-sdk-lite:3.3.0] C:\Users\aiya\.android\build-cache\28d3c78149142e954dfff162d5593b128b271c77\output\AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:24:22-76
+uses-permission#android.permission.GET_TASKS
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:25:22-65
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:26:5-76
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:26:22-73
+uses-permission#android.permission.WAKE_LOCK
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:27:5-68
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:27:22-65
+uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:28:5-80
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:28:22-77
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:29:5-81
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:29:22-78
+uses-feature#android.hardware.camera
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:32:5-60
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:32:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:33:5-70
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:33:19-67
 application
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:24:5-58:19
-MERGED from [com.github.doggycoder:AiyaEffectsAndroid:v2.0.0] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.github.doggycoder\AiyaEffectsAndroid\v2.0.0\AndroidManifest.xml:13:5-17:19
-MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-compat:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-media-compat:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-utils:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-ui:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-fragment:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:37:5-92:19
+MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Users\aiya\.android\build-cache\5dae8959c0d48c40b558dfcce34d8e4f5639dda1\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] C:\Users\aiya\.android\build-cache\a4465c53df807e96cd10fa22c5d941277f7bd6b2\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] C:\Users\aiya\.android\build-cache\f1d55016f47dba75c977005f767c9c4c59e47650\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] C:\Users\aiya\.android\build-cache\28e6031677bb0df2f91738816ea5e84cbe4d7800\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] C:\Users\aiya\.android\build-cache\765366da7821e5abd0303634d209f265a4c3d237\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] C:\Users\aiya\.android\build-cache\411898e46e89690b791ac8420e7e0488f50b4e2d\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Users\aiya\.android\build-cache\e91958e297399f5122c09a3fd92706ad3adf7d6a\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Users\aiya\.android\build-cache\76c0483063aa4cd8af8887925061075db001a87f\output\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] C:\Users\aiya\.android\build-cache\ead3ce4dca2c01f8bc9261e51f372fd73dd24a61\output\AndroidManifest.xml:25:5-20
+MERGED from [com.github.aiyaapp:AiyaEffectsAndroid:v3.0.0] C:\Users\aiya\.android\build-cache\b6e040782480c3d9142c299a689395deda48ce8e\output\AndroidManifest.xml:11:5-12:19
 	android:launchMode
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:33:9-44
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:46:9-44
 	android:anyDensity
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:28:9-34
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:41:9-34
 	android:icon
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:30:9-45
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:43:9-45
 	android:largeHeap
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:32:9-33
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:45:9-33
 	android:screenOrientation
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:36:9-45
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:49:9-45
 	android:label
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:31:9-41
-	android:supportsRtl
-		ADDED from [com.github.doggycoder:AiyaEffectsAndroid:v2.0.0] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.github.doggycoder\AiyaEffectsAndroid\v2.0.0\AndroidManifest.xml:16:9-35
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:44:9-41
 	android:smallScreens
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:37:9-36
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:50:9-36
 	android:hardwareAccelerated
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:29:9-43
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:42:9-43
 	android:normalScreens
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:34:9-37
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:47:9-37
 	android:allowBackup
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:26:9-36
-		REJECTED from [com.github.doggycoder:AiyaEffectsAndroid:v2.0.0] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.github.doggycoder\AiyaEffectsAndroid\v2.0.0\AndroidManifest.xml:14:9-35
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:39:9-36
 	android:alwaysRetainTaskState
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:27:9-45
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:40:9-45
 	android:persistent
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:35:9-35
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:48:9-35
 	android:theme
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:38:9-40
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:51:9-40
 	tools:replace
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:25:9-44
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:38:9-44
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:39:9-69
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:52:9-69
 activity#com.ksyun.media.streamer.demo.DemoActivity
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:40:9-51:20
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:53:9-64:20
 	android:screenOrientation
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:44:13-49
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:57:13-49
 	android:launchMode
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:43:13-43
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:56:13-43
 	android:configChanges
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:42:13-74
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:55:13-74
 	android:theme
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:45:13-55
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:58:13-55
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:41:13-70
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:54:13-70
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:46:13-50:29
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:59:13-63:29
 action#android.intent.action.MAIN
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:47:17-69
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:60:17-69
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:47:25-66
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:60:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:49:17-77
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:62:17-77
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:49:27-74
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:62:27-74
 activity#com.ksyun.media.streamer.demo.CameraActivity
-ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:52:9-57:20
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:65:9-70:20
 	android:launchMode
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:55:13-43
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:68:13-43
 	android:configChanges
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:54:13-74
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:67:13-74
 	android:theme
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:56:13-55
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:69:13-55
 	android:name
-		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:53:13-72
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:66:13-72
+meta-data#EASEMOB_APPKEY
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:72:9-88
+	android:value
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:72:51-85
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:72:20-49
+service#com.hyphenate.chat.EMChatService
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:74:9-91
+	android:exported
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:74:66-89
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:74:18-65
+service#com.hyphenate.chat.EMJobService
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:75:9-78:11
+	android:exported
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:77:13-36
+	android:permission
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:76:13-69
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:75:18-64
+receiver#com.hyphenate.chat.EMMonitorReceiver
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:80:9-90:20
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:80:19-70
+intent-filter#android.intent.action.PACKAGE_REMOVED
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:81:13-84:29
+action#android.intent.action.PACKAGE_REMOVED
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:82:17-79
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:82:25-77
+data
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:83:17-49
+	android:scheme
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:83:23-47
+intent-filter#android.intent.action.BOOT_COMPLETED+android.intent.action.USER_PRESENT
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:86:13-89:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:87:17-78
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:87:25-76
+action#android.intent.action.USER_PRESENT
+ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:88:17-77
+	android:name
+		ADDED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml:88:25-74
 uses-sdk
 INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.github.doggycoder:AiyaEffectsAndroid:v2.0.0] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.github.doggycoder\AiyaEffectsAndroid\v2.0.0\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-v4:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-compat:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-media-compat:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-utils:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-core-ui:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-fragment:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Users\aiya\.android\build-cache\5dae8959c0d48c40b558dfcce34d8e4f5639dda1\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] C:\Users\aiya\.android\build-cache\a4465c53df807e96cd10fa22c5d941277f7bd6b2\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:24.2.1] C:\Users\aiya\.android\build-cache\f1d55016f47dba75c977005f767c9c4c59e47650\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:24.2.1] C:\Users\aiya\.android\build-cache\28e6031677bb0df2f91738816ea5e84cbe4d7800\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:24.2.1] C:\Users\aiya\.android\build-cache\765366da7821e5abd0303634d209f265a4c3d237\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] C:\Users\aiya\.android\build-cache\411898e46e89690b791ac8420e7e0488f50b4e2d\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Users\aiya\.android\build-cache\e91958e297399f5122c09a3fd92706ad3adf7d6a\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Users\aiya\.android\build-cache\76c0483063aa4cd8af8887925061075db001a87f\output\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] C:\Users\aiya\.android\build-cache\ead3ce4dca2c01f8bc9261e51f372fd73dd24a61\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.github.aiyaapp:AiyaEffectsAndroid:v3.0.0] C:\Users\aiya\.android\build-cache\b6e040782480c3d9142c299a689395deda48ce8e\output\AndroidManifest.xml:7:5-9:41
+MERGED from [com.hyphenate:hyphenate-sdk-lite:3.3.0] C:\Users\aiya\.android\build-cache\28d3c78149142e954dfff162d5593b128b271c77\output\AndroidManifest.xml:8:5-11:39
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:24.2.1] C:\Android\Work\AiyaEffectsWithKSY\demo\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:24.2.1] C:\Users\aiya\.android\build-cache\5dae8959c0d48c40b558dfcce34d8e4f5639dda1\output\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
+	tools:ignore
+		ADDED from [com.hyphenate:hyphenate-sdk-lite:3.3.0] C:\Users\aiya\.android\build-cache\28d3c78149142e954dfff162d5593b128b271c77\output\AndroidManifest.xml:11:9-36
 	android:minSdkVersion
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
 		INJECTED from C:\Android\Work\AiyaEffectsWithKSY\demo\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [com.hyphenate:hyphenate-sdk-lite:3.3.0] C:\Users\aiya\.android\build-cache\28d3c78149142e954dfff162d5593b128b271c77\output\AndroidManifest.xml:13:5-81
+	android:name
+		ADDED from [com.hyphenate:hyphenate-sdk-lite:3.3.0] C:\Users\aiya\.android\build-cache\28d3c78149142e954dfff162d5593b128b271c77\output\AndroidManifest.xml:13:22-78
