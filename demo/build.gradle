@@ -12,14 +12,14 @@ dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     compile fileTree(include: '*/so', dir: 'libs/armeabi-v7a')
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.github.aiyaapp:AiyaEffectsAndroid:v3.0.0'
+    compile 'com.aiyaapp.aiya:AiyaEffectsSDK:v3.3.0'
     compile 'com.hyphenate:hyphenate-sdk-lite:3.3.0'
 //    compile project(':AiyaEffectsAndroid:AiyaCameraSDK')
 }
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.aiyaapp.aiya"

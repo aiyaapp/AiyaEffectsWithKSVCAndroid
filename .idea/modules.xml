@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AiyaEffectsWithKSY.iml" filepath="$PROJECT_DIR$/AiyaEffectsWithKSY.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AiyaEffectsWithKSVCAndroid.iml" filepath="$PROJECT_DIR$/AiyaEffectsWithKSVCAndroid.iml" />
+      <module fileurl="file://D:\Develop\Code\Android\AiyaEffectsWithKSVCAndroid\AiyaEffectsWithKSY.iml" filepath="D:\Develop\Code\Android\AiyaEffectsWithKSVCAndroid\AiyaEffectsWithKSY.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://D:\Develop\Code\Android\AiyaEffectsWithKSVCAndroid\demo\demo.iml" filepath="D:\Develop\Code\Android\AiyaEffectsWithKSVCAndroid\demo\demo.iml" />
     </modules>
   </component>
 </project>

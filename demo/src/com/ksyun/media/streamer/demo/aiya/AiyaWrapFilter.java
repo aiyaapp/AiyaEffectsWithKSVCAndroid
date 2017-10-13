@@ -40,7 +40,6 @@ public class AiyaWrapFilter extends ImgTexFilterBase {
     protected void onGLContextReady() {
         super.onGLContextReady();
         Log.e(tag,"onGLContextReady");
-        mFilter.create();
     }
 
     @Override
@@ -48,6 +47,7 @@ public class AiyaWrapFilter extends ImgTexFilterBase {
         mSrcFormat=new ImgTexFormat(1,imgTexFormat.width,imgTexFormat.height);
         Log.e(tag,"onFormatChanged");
         isStartDraw=false;
+        mFilter.create();
         mFilter.setSize(imgTexFormat.width,imgTexFormat.height);
     }
 
