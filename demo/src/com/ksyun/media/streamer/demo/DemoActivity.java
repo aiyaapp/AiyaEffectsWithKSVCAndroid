@@ -17,10 +17,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.aiyaapp.aiya.AiyaEffects;
 import com.aiyaapp.aiya.R;
-import com.aiyaapp.camera.sdk.AiyaEffects;
-import com.aiyaapp.camera.sdk.base.ActionObserver;
-import com.aiyaapp.camera.sdk.base.Event;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -123,7 +121,7 @@ public class DemoActivity extends Activity
                         if(msg.getStringAttribute("gift","").equals("gift")){
                             String giftId=((EMTextMessageBody)msg.getBody()).getMessage();
                             Log.e("aiya",giftId);
-                            AiyaEffects.getInstance().setEffect("assets/modelsticker/"+giftId+"/meta.json");
+                            //AiyaEffects.getInstance().setEffect("assets/modelsticker/"+giftId+"/meta.json");
                         }
                     }
                 }
@@ -151,28 +149,7 @@ public class DemoActivity extends Activity
         };
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
 
-        final ActionObserver observer = new ActionObserver() {
-            @Override
-            public void onAction(Event state) {
-                if (state.eventType== Event.RESOURCE_FAILED) {
-                    com.aiyaapp.camera.sdk.base.Log.e("resource failed");
-                } else if (state.eventType == Event.RESOURCE_READY) {
-                    com.aiyaapp.camera.sdk.base.Log.e("resource ready");
-                } else if (state.eventType == Event.INIT_FAILED) {
-                    com.aiyaapp.camera.sdk.base.Log.e("init failed");
-                    Toast.makeText(DemoActivity.this, "注册失败，请检查网络", Toast.LENGTH_SHORT)
-                            .show();
-                    AiyaEffects.getInstance().unRegisterObserver(this);
-                } else if (state.eventType == Event.INIT_SUCCESS) {
-                    com.aiyaapp.camera.sdk.base.Log.e("init success");
-                    AiyaEffects.getInstance().unRegisterObserver(this);
-                }
-            }
-        };
-        AiyaEffects.getInstance().registerObserver(observer);
-        AiyaEffects.getInstance().init(DemoActivity.this, getExternalFilesDir(null)
-                .getAbsolutePath() + "/146-563-918-415-578-677-783-748-043-705-956.vlc", "");
-
+        AiyaEffects.init(this,"477de67d19ba39fb656a4806c803b552");
         mConnectButton = (Button) findViewById(R.id.connectBT);
         mConnectButton.setOnClickListener(this);
 

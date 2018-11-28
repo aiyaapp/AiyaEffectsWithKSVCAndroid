@@ -38,10 +38,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aiyaapp.aiya.AiyaEffects;
+
 import com.aiyaapp.aiya.R;
-import com.aiyaapp.camera.sdk.AiyaEffects;
-import com.aiyaapp.camera.sdk.filter.EffectFilter;
-import com.aiyaapp.camera.sdk.widget.AiyaController;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.streamer.capture.camera.CameraTouchHelper;
 import com.ksyun.media.streamer.demo.aiya.AiyaMenu;
@@ -74,12 +73,6 @@ public class CameraActivity extends Activity implements
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String TAG = "CameraActivity";
-
-
-    //AiyaEffectSDK
-    private AiyaController mController;
-    //
-
     private GLSurfaceView mCameraPreviewView;
     //private TextureView mCameraPreviewView;
     private CameraHintView mCameraHintView;
@@ -363,8 +356,7 @@ public class CameraActivity extends Activity implements
             }
         });
 
-        mStreamer.getImgTexFilterMgt().setFilter(new AiyaWrapFilter(mStreamer.getGLRender(),
-                new EffectFilter(getResources())));
+        mStreamer.getImgTexFilterMgt().setFilter(new AiyaWrapFilter(mStreamer.getGLRender()));
         // add RGBA buffer filter to ImgTexFilterMgt, this would cause performance drop,
         // only valid after Android 4.4
         //RGBABufDemoFilter demoFilter = new RGBABufDemoFilter(mStreamer.getGLRender());
@@ -376,6 +368,7 @@ public class CameraActivity extends Activity implements
         mCameraPreviewView.setOnTouchListener(cameraTouchHelper);
         // set CameraHintView to show focus rect and zoom ratio
         cameraTouchHelper.setCameraHintView(mCameraHintView);
+        AiyaEffects.init(this,"477de67d19ba39fb656a4806c803b552");
     }
 
     private void initBeautyUI() {
@@ -403,10 +396,10 @@ public class CameraActivity extends Activity implements
                         if(bean.name.equals(now)){
                             if(bean.path!=null){
                                 mEffect="assets/modelsticker/"+bean.path;
-                                AiyaEffects.getInstance().setEffect(mEffect);
+                                //AiyaEffects.getInstance().setEffect(mEffect);
                             }else{
                                 mEffect=null;
-                                AiyaEffects.getInstance().setEffect(null);
+                                //AiyaEffects.getInstance().setEffect(null);
                             }
                             break;
                         }
@@ -988,7 +981,7 @@ public class CameraActivity extends Activity implements
             mStreamer.setEnableImgBufBeauty(isChecked);
         } else {
             mBeautyChooseView.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
-            AiyaEffects.getInstance().setEffect(isChecked?mEffect:null);
+            //AiyaEffects.getInstance().setEffect(isChecked?mEffect:null);
         }
     }
 

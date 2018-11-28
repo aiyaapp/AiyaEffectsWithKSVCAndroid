@@ -9,15 +9,20 @@ package com.ksyun.media.streamer.demo.aiya;
 
 import android.util.Log;
 
-import com.aiyaapp.camera.sdk.filter.AFilter;
+import com.aiyaapp.aiya.AiyaBeauty;
 import com.ksyun.media.streamer.filter.imgtex.ImgTexFilterBase;
 import com.ksyun.media.streamer.framework.ImgTexFormat;
 import com.ksyun.media.streamer.framework.ImgTexFrame;
 import com.ksyun.media.streamer.util.gles.GLRender;
+import com.aiyaapp.aiya.filter.AyBeautyFilter;
+
+import static android.opengl.GLES20.GL_BLEND;
+import static android.opengl.GLES20.GL_DEPTH_TEST;
+import static android.opengl.GLES20.glDisable;
 
 public class AiyaWrapFilter extends ImgTexFilterBase {
 
-    private AFilter mFilter;
+    private AyBeautyFilter mFilter;
 
     private boolean isStartDraw=false;
 
@@ -25,9 +30,10 @@ public class AiyaWrapFilter extends ImgTexFilterBase {
 
     private final String tag=getClass().getName();
 
-    public AiyaWrapFilter(GLRender glRender, final AFilter filter) {
+    public AiyaWrapFilter(GLRender glRender) {
         super(glRender);
-        this.mFilter=filter;
+
+        this.mFilter= new AyBeautyFilter(AiyaBeauty.TYPE5);
     }
 
 
@@ -48,7 +54,8 @@ public class AiyaWrapFilter extends ImgTexFilterBase {
         Log.e(tag,"onFormatChanged");
         isStartDraw=false;
         mFilter.create();
-        mFilter.setSize(imgTexFormat.width,imgTexFormat.height);
+        mFilter.sizeChanged(imgTexFormat.width,imgTexFormat.height);
+        mFilter.setDegree(0.5f);
     }
 
     @Override
@@ -58,14 +65,17 @@ public class AiyaWrapFilter extends ImgTexFilterBase {
             Log.e(tag,"onDraw");
         }
 
-        mFilter.setTextureId(imgTexFrames[0].textureId);
-        mFilter.draw();
+        int texture = mFilter.drawToTexture(imgTexFrames[0].textureId);
+        mFilter.draw(texture);
+        glDisable(GL_BLEND);
+        glDisable(GL_DEPTH_TEST);
     }
 
     @Override
     protected void onRelease() {
         super.onRelease();
         isStartDraw=false;
+        mFilter.destroy();
         Log.e(tag,"onRelease");
     }
 

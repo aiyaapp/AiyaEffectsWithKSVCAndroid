@@ -1,4 +1,4 @@
-include ':demo'
+include ':demo', ':AyShortVideoEffect', ':AyBeauty', ':aavt', ':AyEffect', ':AyFaceTrack', ':AyCore'
 
 //include ':AiyaEffectsAndroid'
 //

@@ -9,8 +9,8 @@ package com.ksyun.media.streamer.demo.aiya;
 
 import android.content.Context;
 import android.util.JsonReader;
+import android.util.Log;
 
-import com.aiyaapp.camera.sdk.base.Log;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,7 +32,7 @@ public class AiyaMenu {
 
     public void readMenu(String menuPath){
         try {
-            Log.e( "解析菜单->" +menuPath);
+            Log.e("AiyaMenu", "解析菜单->" +menuPath);
             JsonReader r = new JsonReader(new InputStreamReader(context.getAssets().open(menuPath)));
             r.beginArray();
             data.clear();
@@ -49,7 +49,7 @@ public class AiyaMenu {
                     }
                 }
                 data.add(menu);
-                Log.e( "增加菜单->" + menu.name);
+                Log.e("AiyaMenu", "增加菜单->" + menu.name);
                 r.endObject();
             }
             r.endArray();
