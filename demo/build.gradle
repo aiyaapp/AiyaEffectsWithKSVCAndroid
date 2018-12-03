@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 buildscript {
     repositories {
         jcenter({url "http://jcenter.bintray.com/"})
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -14,10 +15,8 @@ dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     compile fileTree(include: '*/so', dir: 'libs/armeabi-v7a')
     compile 'com.android.support:appcompat-v7:24.2.1'
-    //compile 'com.aiyaapp.aiya:AiyaEffectsSDK:v3.3.0'
     compile 'com.hyphenate:hyphenate-sdk-lite:3.3.0'
     implementation project(':AyBeauty')
-    //    compile project(':AiyaEffectsAndroid:AiyaCameraSDK')
     implementation project(':AyCore')
     implementation project(':aavt')
     implementation project(':AyEffect')
@@ -30,7 +29,7 @@ android {
     buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "com.aiyaapp.aiya"
+        applicationId "com.aiyaapp.aiya.test"
         minSdkVersion 18
         targetSdkVersion 25
         versionCode 15
